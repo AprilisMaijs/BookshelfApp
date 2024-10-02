@@ -1,0 +1,21 @@
+﻿@model BookshelfApp.Models.Book  // Ensure this matches your Book model
+
+<h1>Add Book by ISBN</h1>
+
+<form asp-action="AddByISBN" method="post">
+    <div>
+        <label for="isbn">ISBN</label>
+        <input type="text" id="isbn" name="ISBN" required />
+    </div>
+    <button type="submit">Add Book</button>
+</form>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="text-danger">
+        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <p>@error.ErrorMessage</p>
+        }
+    </div>
+}

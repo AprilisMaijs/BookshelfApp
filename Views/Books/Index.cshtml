@@ -1,0 +1,48 @@
+﻿@model BookshelfApp.Models.Book
+
+@{
+    ViewData["Title"] = "Book Lookup";
+}
+
+<h2>Book Lookup</h2>
+
+<!-- Form to input ISBN -->
+<form asp-action="LookupByISBN" method="post">
+    <div class="form-group">
+        <label for="isbn">Enter ISBN:</label>
+        <input type="text" class="form-control" id="isbn" name="isbn" placeholder="Enter ISBN" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Find Book</button>
+</form>
+
+<hr />
+
+<!-- Display book details if a book is found -->
+@if (Model != null)
+{
+    <div class="card">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="@Model.CoverUrl" alt="Book Cover" class="card-img" style="max-width:100%; height:auto;" />
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h4 class="card-title">@Model.Title</h4>
+                    <h5 class="card-subtitle text-muted">@Model.Authors</h5>
+                    <p class="card-text">@Model.Description</p>
+                    <p class="card-text">
+                        <small class="text-muted">ISBN: @Model.ISBN</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<hr />
+
+<!-- Links to add books either by ISBN or manually -->
+<p>
+    <a asp-action="AddByISBN" class="btn btn-success">Add Book by ISBN</a>
+    <a asp-action="Create" class="btn btn-primary">Add Book Manually</a>
+</p>

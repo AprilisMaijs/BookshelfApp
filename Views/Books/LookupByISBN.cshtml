@@ -1,0 +1,29 @@
+﻿@model BookshelfApp.Models.Book
+
+@{
+    ViewData["Title"] = "Lookup Book by ISBN";
+}
+
+<h2>Lookup Book by ISBN</h2>
+
+<form asp-action="LookupByISBN" method="post">
+    <div class="form-group">
+        <label for="isbn">Enter ISBN:</label>
+        <input type="text" id="isbn" name="isbn" class="form-control" required />
+        <span asp-validation-for="ISBN" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Lookup</button>
+</form>
+
+@if (Model != null)
+{
+    <h3>Book Details</h3>
+    <div class="card">
+        <img class="card-img-top" src="@Model.CoverUrl" alt="Book Cover" />
+        <div class="card-body">
+            <h5 class="card-title">@Model.Title</h5>
+            <p class="card-text"><strong>Author(s):</strong> @Model.Authors</p>
+            <p class="card-text"><strong>Description:</strong> @Model.Description</p>
+        </div>
+    </div>
+}
